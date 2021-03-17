@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { SafeAreaView, StyleSheet, TouchableOpacity} from 'react-native';
 import { View, Text, TextInput, Button, Alert } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
+import { color } from "react-native-reanimated";
 import { useAuth } from "../providers/AuthProvider";
 import styles from "../stylesheet";
+
+
 
 export function WelcomeView({ navigation }) {
   const [email, setEmail] = useState("");
@@ -26,6 +31,8 @@ export function WelcomeView({ navigation }) {
     }
   };
 
+  
+
   // The onPressSignUp method calls AuthProvider.signUp with the
   // email/password in state and then signs in.
   const onPressSignUp = async () => {
@@ -35,17 +42,25 @@ export function WelcomeView({ navigation }) {
     } catch (error) {
       Alert.alert(`Failed to sign up: ${error.message}`);
     }
+    
   };
 
+
   return (
+
     <View>
-      <Text>Signup or Signin:</Text>
+    
+      <Text style={{fontSize:22 , textAlign:"center", lineHeight:300}}>Sign In or Sign Up</Text>
       <View style={styles.inputContainer}>
         <TextInput
           onChangeText={setEmail}
           value={email}
           placeholder="email"
-          style={styles.inputStyle}
+          lineHeight = {18}
+          borderWidth = {1}
+          padding = {10}
+          borderRadius = {10}
+          Text style={styles.inputStyle}
           autoCapitalize="none"
         />
       </View>
@@ -54,12 +69,24 @@ export function WelcomeView({ navigation }) {
           onChangeText={(text) => setPassword(text)}
           value={password}
           placeholder="password"
+          lineHeight = {18}
+          borderWidth = {1}
+          padding = {10}
+          borderRadius = {10}
           style={styles.inputStyle}
           secureTextEntry
         />
       </View>
       <Button onPress={onPressSignIn} title="Sign In" />
+      
+      
+      
       <Button onPress={onPressSignUp} title="Sign Up" />
+
+      
     </View>
+    
   );
+
+  
 }
